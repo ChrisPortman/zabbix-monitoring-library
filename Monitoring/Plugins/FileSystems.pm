@@ -4,7 +4,6 @@ package Monitoring::Plugins::FileSystems;
 
 use strict;
 use warnings;
-use Log::Any qw ( $log );
 
 sub register {
     my @tests = (

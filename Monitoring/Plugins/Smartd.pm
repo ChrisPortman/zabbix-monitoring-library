@@ -4,7 +4,6 @@ package Monitoring::Plugins::Smartd;
 
 use strict;
 use warnings;
-use Log::Any qw ( $log );
 
 my ($smartctl) = `which smartctl`;
 chomp($smartctl);

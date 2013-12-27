@@ -5,20 +5,10 @@ use warnings;
 use JSON::XS;
 use Getopt::Long;
 use Monitoring::Plugins;
-use Log::Dispatch;
-use Log::Any::Adapter;
 use Data::Dumper;
 
 my $USERAGENTCONF   = '/etc/zabbix/zabbix_agentd.conf.d/useragents.conf';
 my $ZABBIXAGENTINIT = '/etc/init.d/zabbix-agent';
-
-#Set up logging
-my $log = Log::Dispatch->new(
-    outputs => [
-        #[ 'Screen', min_level => 'info', callbacks => sub { uc($_[3]).': '.$_[1]."\n" } ],
-    ],
-);
-Log::Any::Adapter->set( 'Dispatch', dispatcher => $log );
 
 #Process Command line opts
 my $module;

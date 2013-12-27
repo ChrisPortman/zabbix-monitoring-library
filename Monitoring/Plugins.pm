@@ -4,7 +4,6 @@ package Monitoring::Plugins;
 
 use strict;
 use warnings;
-use Log::Any qw ( $log );
 
 use Module::Pluggable
     search_path => ['Monitoring::Plugins'],
@@ -32,11 +31,9 @@ sub loadModules {
     # First clear any pluggable modules from %INC so they are reloaded.
     #$log->info('Looking for modules that need clearing to be reloaded');
     if ( $self->{'modules'} ) {
-        $log->info('Clearing modules...');
         for my $module ( keys %{ $self->{'modules'} } ) {
             my $incmod = $self->{'modules'}->{$module}.'.pm';
             $incmod =~ s|::|/|g;
-            $log->info('Clearing ' . $self->{'modules'}->{$module});
             
             if ( $INC{ $incmod } ) {
                 $log->info('Clearing module ' . $incmod . ' from %INC');
