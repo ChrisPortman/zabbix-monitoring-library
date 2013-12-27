@@ -1,0 +1,11 @@
+#!/bin/bash
+
+rm -rf /bin/monitoring.pl
+rm -rf /usr/share/perl5/Monitoring
+
+cp monitoring.pl /bin/
+cp -R Monitoring /usr/share/perl5/Monitoring
+
+chmod a+x /bin/monitoring.pl
+
+exit 0
