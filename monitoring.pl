@@ -37,8 +37,6 @@ sub discover {
     my $module = shift or return;
     return if ref $module;
     
-    $log->info("Running discovery for module $module");
-    
     #Call the discovery method.
     my $result = $modules->discover($module);
     
@@ -57,8 +55,6 @@ sub test {
     my $module = shift or return;
     my @args   = @_;
     
-    $log->info("Running test @args for module $module");
-    
     #Call the modules test function passing any suplied arguments.
     my $result = $modules->test($module, @args);
     print "$result\n";
@@ -68,8 +64,6 @@ sub register {
     my $registrations = $modules->register();
     $registrations =  join("\n", sort { $a cmp $b } @{$registrations});
     $registrations .= "\n";
-    
-    $log->info("Registering all tests from all modules");
     
     unless ( -d '/etc/zabbix/' ) {
         mkdir '/etc/zabbix/';
@@ -128,9 +122,6 @@ my %actions = (
 
 if ( $actions{$action} ) {
     $actions{$action}->($module, @args);
-}
-else {
-    $log->error("Invalid action $action");
 }
 
 exit 0;
