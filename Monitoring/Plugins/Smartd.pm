@@ -33,7 +33,7 @@ sub discover {
             my $name    = $1;
             
             push @{$return->{'data'}}, {
-                '{#DEV}' => $name,
+                '{#DEVNAME}' => $name,
             };
         }
     }
