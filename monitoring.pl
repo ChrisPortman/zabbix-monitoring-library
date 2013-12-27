@@ -61,9 +61,18 @@ sub test {
 }
 
 sub register {
-    my $registrations = $modules->register();
-    $registrations =  join("\n", sort { $a cmp $b } @{$registrations});
+    my @registrations = map { 
+        unless (/^UserParameter/) { 
+            "UserParameter=$_";
+        }
+        else {
+            $_;
+        } 
+    } $modules->register();
+    
+    $registrations =  join("\n", sort { $a cmp $b } @registrations);
     $registrations .= "\n";
+    
     
     unless ( -d '/etc/zabbix/' ) {
         mkdir '/etc/zabbix/';
