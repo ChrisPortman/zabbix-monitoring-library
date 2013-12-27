@@ -29,14 +29,12 @@ sub loadModules {
     my $self = shift;
     
     # First clear any pluggable modules from %INC so they are reloaded.
-    #$log->info('Looking for modules that need clearing to be reloaded');
     if ( $self->{'modules'} ) {
         for my $module ( keys %{ $self->{'modules'} } ) {
             my $incmod = $self->{'modules'}->{$module}.'.pm';
             $incmod =~ s|::|/|g;
             
             if ( $INC{ $incmod } ) {
-                $log->info('Clearing module ' . $incmod . ' from %INC');
                 delete $INC{ $incmod }
             }
         }
@@ -48,14 +46,7 @@ sub loadModules {
         $mod =~ s/^Monitoring::Plugins:://;
         $mod => $_
     } $self->modules();
-
     
-    $log->info("Loading modules...");
-    
-    for my $module ( keys %modules ) {
-		$log->info("Loaded module $module");
-	}
-	
     $self->{'modules'} = \%modules;
 
     return 1;
@@ -112,7 +103,6 @@ sub test {
         $result = $self->{'modules'}->{$module}->test(@args);
     }
     
-    $log->info("Got result $result");
     return $result;
 }
 

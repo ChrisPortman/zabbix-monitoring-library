@@ -14,7 +14,6 @@ sub register {
         chmod $mode, $smartctl;
     }
     else {
-        $log->error("No smartctl??");
         return;
     }
     
