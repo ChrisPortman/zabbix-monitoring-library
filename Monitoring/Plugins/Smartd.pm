@@ -10,7 +10,7 @@ chomp($smartctl);
 
 sub register {
     if ( -f $smartctl ) {
-        chmod 4755, $smartctl;
+        chmod oct(4755), $smartctl;
     }
     else {
         return;
