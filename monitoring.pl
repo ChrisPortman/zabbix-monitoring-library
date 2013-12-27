@@ -70,7 +70,7 @@ sub register {
         } 
     } $modules->register();
     
-    $registrations =  join("\n", sort { $a cmp $b } @registrations);
+    my $registrations =  join("\n", sort { $a cmp $b } @registrations);
     $registrations .= "\n";
     
     
