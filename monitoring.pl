@@ -57,6 +57,8 @@ sub test {
     
     #Call the modules test function passing any suplied arguments.
     my $result = $modules->test($module, @args);
+    $result ||= 'UNKNOWN';
+    
     print "$result\n";
 }
 

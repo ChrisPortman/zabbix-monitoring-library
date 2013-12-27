@@ -10,8 +10,7 @@ chomp($smartctl);
 
 sub register {
     if ( -f $smartctl ) {
-        my $mode = 4755;
-        chmod $mode, $smartctl;
+        chmod 4755, $smartctl;
     }
     else {
         return;
