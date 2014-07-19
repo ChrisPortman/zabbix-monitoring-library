@@ -6,7 +6,9 @@ This software is intended to simplify the development and deployment of scripts 
 
 ## How it Works
 
-The idea is that each different thing to monitor is a perl script that defines a module under the Monitoring::Plugins namespace.  It will then get automatically included using Modules::Pluggable.  When developing a plugin, all that is required is the definition of at least a 'register' function and a 'test' function.
+The idea is that each different thing to monitor is a perl script that defines a module under the Monitoring::Plugins namespace.  It will then get automatically included using Modules::Pluggable.  When developing a plugin, all that is required is the definition of at least a 'register' function and a 'test' function and an option 'discover' function.
+
+### Register
 
 The 'register' function should evaluate the system to first establish if the plugin is applicable or not, and if it is, it should return an array of strings for be included as UserAgent settings to go in the zabbix agent 
 configuration.  This should look like:
@@ -21,7 +23,13 @@ You could cron the run of the register process so that new plugins are added to 
 #> monitoring.pl -a register
 ```
 
+Which will invoke the register function of all modules available.
+
+### Test
+
 The 'test' function is the function that actually determines the value for the key that will be sent back to Zabbix as the value for the item which will be used to determine any alarm states.  It is used when '-a test' argument is specified with a '-m modulename'.
+
+### Discover
 
 An optional 'discover' function can be specified.  This is used when using low level discovery within zabbix.  For example, if you want to set up SMART monitoring of disks, you first want to know what disks there are.  A discover function will find the disks that should have SMART monitoring enabled.  Zabbix expects JSON to be returned.  The discover function within the module should just return a hash, the process will convert it to JSON output.  See the Zabbix manual on low level discovery for more info on the structure of the hash.
 
