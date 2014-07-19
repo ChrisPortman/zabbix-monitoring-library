@@ -52,6 +52,17 @@ sub loadModules {
     return 1;
 }
 
+sub register {
+    my $self = shift;
+    my @registrations;
+    
+    for my $mod ( $self->modules() ) {
+        push @registrations, $mod->register();
+    }
+    
+    return wantarray ? @registrations : \@registrations;
+}
+
 sub discover {
     my $self   = shift;
     my $module = shift;
@@ -104,17 +115,6 @@ sub test {
     }
     
     return $result;
-}
-
-sub register {
-    my $self = shift;
-    my @registrations;
-    
-    for my $mod ( $self->modules() ) {
-        push @registrations, $mod->register();
-    }
-    
-    return wantarray ? @registrations : \@registrations;
 }
 
 1;
