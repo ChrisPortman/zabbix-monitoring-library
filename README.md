@@ -17,6 +17,10 @@ zabbix.item.key,monitoring.pl -m <modulename> -a test [--args <args list>]
 
 You could cron the run of the register process so that new plugins are added to zabbix periodically.
 
+```
+#> monitoring.pl -a register
+```
+
 The 'test' function is the function that actually determines the value for the key that will be sent back to Zabbix as the value for the item which will be used to determine any alarm states.  It is used when '-a test' argument is specified with a '-m modulename'.
 
 An optional 'discover' function can be specified.  This is used when using low level discovery within zabbix.  For example, if you want to set up SMART monitoring of disks, you first want to know what disks there are.  A discover function will find the disks that should have SMART monitoring enabled.  Zabbix expects JSON to be returned.  The discover function within the module should just return a hash, the process will convert it to JSON output.  See the Zabbix manual on low level discovery for more info on the structure of the hash.
