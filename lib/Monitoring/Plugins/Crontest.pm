@@ -10,7 +10,7 @@ my $testfile = '/var/tmp/crontest';
 sub register {
   my @agents;
   if ( -f '/var/tmp/crontest' ) {
-    push(@agents, 'services.cron.running,monitoring.pl -m Crontest -a test');
+    push(@agents, 'cron.lasttest,monitoring.pl -m Crontest -a test');
   }
   
   return @agents;
