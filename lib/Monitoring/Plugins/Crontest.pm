@@ -17,11 +17,11 @@ sub register {
 }
 
 sub test {
-  $diff = undef;
+  my $diff = undef;
   
   if ( -f $testfile ) {
     my $mtime = (stat($testfile))[9] || 0;
-    my $diff = abs(time - $mtime);
+    $diff = abs(time - $mtime);
   }
 
   return $diff;
