@@ -5,7 +5,7 @@ package Monitoring::Plugins::Smartd;
 use strict;
 use warnings;
 
-my ($smartctl) = `which smartctl`;
+my ($smartctl) = `which smartctl 2> /dev/null` || '';
 chomp($smartctl);
 
 sub register {
