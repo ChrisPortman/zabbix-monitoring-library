@@ -9,7 +9,7 @@ use Getopt::Long;
 use Monitoring::Plugins;
 use Data::Dumper;
 
-my $USERAGENTCONF   = '/etc/zabbix/zabbix_agentd.conf.d/useragents.conf';
+my $USERAGENTCONF   = '/etc/zabbix/zabbix_agentd.d/useragents.conf';
 my $ZABBIXAGENTINIT = '/etc/init.d/zabbix-agent';
 
 #Process Command line opts
