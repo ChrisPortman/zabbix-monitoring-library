@@ -34,13 +34,13 @@ my $modules = Monitoring::Plugins->new();
 
 sub register {
     my @registrations = map { 
+        s/,monitoring\.pl/,$EXE/;
         unless (/^UserParameter/) { 
             "UserParameter=$_";
         }
         else {
             $_;
         }
-        s/,monitoring\.pl/,$EXE/
     } $modules->register();
     
     my $registrations =  join("\n", sort { $a cmp $b } @registrations);
