@@ -9,6 +9,8 @@ use Getopt::Long;
 use Monitoring::Plugins;
 use Data::Dumper;
 
+my $EXE = $FindBin::Bin
+
 my $USERAGENTCONF   = '/etc/zabbix/zabbix_agentd.d/useragents.conf';
 my $ZABBIXAGENTINIT = '/etc/init.d/zabbix-agent';
 
@@ -37,7 +39,8 @@ sub register {
         }
         else {
             $_;
-        } 
+        }
+        s/,monitoring\.pl/,$EXE/
     } $modules->register();
     
     my $registrations =  join("\n", sort { $a cmp $b } @registrations);
