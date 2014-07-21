@@ -8,10 +8,12 @@ use IO::Dir;
 use IO::File;
 
 sub register {
-    [
+    my @tests = (
       'proc.running.discover,monitoring.pl -m Processes -a discover',
       'proc.running.process[*],monitoring.pl -m Processes -a test --args $1',
-    ]
+    )
+    
+    return wantarray? @tests : \@tests;
 }
 
 sub discover {
