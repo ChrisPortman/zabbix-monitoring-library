@@ -62,9 +62,12 @@ sub register {
         eval {
             @regs = $mod->register();
         };
-        unless ($@) {
-          push @registrations, @regs;
+        if ($@) {
+            warn "Could not register $mod: $@\n";
+            next;
         }
+
+        push @registrations, @regs;
     }
     
     return wantarray ? @registrations : \@registrations;
@@ -82,7 +85,8 @@ sub discover {
             $result = $self->{'modules'}->{$module}->discover();
         };
         if ($@) {
-          $result = {};
+            warn "Could not run discover for $module: $@\n";
+            $result = {};
         }
     }
     
@@ -126,6 +130,7 @@ sub test {
             $result = $self->{'modules'}->{$module}->test(@args);
         };
         if ($@) {
+            warn "Test failed for $module: $@\n";
             $result = '';
         }
     }
