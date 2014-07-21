@@ -57,13 +57,13 @@ sub register {
     my @registrations;
     
     for my $mod ( $self->modules() ) {
-        my $regs;
+        my @regs;
 
         eval {
-            $regs = $mod->register();
+            @regs = $mod->register();
         };
         unless ($@) {
-          push @registrations, $regs;
+          push @registrations, @regs;
         }
     }
     
