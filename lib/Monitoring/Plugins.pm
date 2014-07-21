@@ -61,7 +61,7 @@ sub register {
 
         eval {
             $regs = $mod->register();
-        }
+        };
         unless ($@) {
           push @registrations, $regs;
         }
@@ -80,7 +80,7 @@ sub discover {
         eval {
             #Run the action method from the module
             $result = $self->{'modules'}->{$module}->discover();
-        }
+        };
         if ($@) {
           $result = {};
         }
@@ -124,7 +124,7 @@ sub test {
         eval {
             #Run the action method from the module
             $result = $self->{'modules'}->{$module}->test(@args);
-        }
+        };
         if ($@) {
             $result = '';
         }
