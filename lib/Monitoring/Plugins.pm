@@ -57,7 +57,14 @@ sub register {
     my @registrations;
     
     for my $mod ( $self->modules() ) {
-        push @registrations, $mod->register();
+        my $registrations;
+
+        eval {
+            $registrations = $mod->register();
+        }
+        unless ($@) {
+          push @registrations, $mod->register();
+        }
     }
     
     return wantarray ? @registrations : \@registrations;
@@ -70,8 +77,13 @@ sub discover {
     my $result;
 
     if ( $self->{'modules'}->{$module} ) {
-        #Run the action method from the module
-        $result = $self->{'modules'}->{$module}->discover();
+        eval {
+            #Run the action method from the module
+            $result = $self->{'modules'}->{$module}->discover();
+        }
+        if ($@) {
+          $result = {};
+        }
     }
     
     unless (    ref $result and ref $result eq 'HASH' 
@@ -84,7 +96,6 @@ sub discover {
        
        #return a graceful {}
        $result = {};
-       
     }
     
     #Validate the data.
@@ -110,8 +121,13 @@ sub test {
     
     my $result = '';
     if ( $self->{'modules'}->{$module} ) {
-        #Run the action method from the module
-        $result = $self->{'modules'}->{$module}->test(@args);
+        eval {
+            #Run the action method from the module
+            $result = $self->{'modules'}->{$module}->test(@args);
+        }
+        if ($@) {
+            $result = '';
+        }
     }
     
     return $result;
